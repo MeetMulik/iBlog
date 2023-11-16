@@ -39,7 +39,7 @@ export default function Navbar() {
                 </p>
             </div>
 
-            {status === "authenticated" ? (
+            {"authenticated" === "authenticated" ? (
                 <>
                     <div
                         ref={popupRef}
