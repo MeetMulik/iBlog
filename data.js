@@ -1,23 +1,27 @@
 export const postsData = [
   {
-    id: 1,
+    id: "1",
+    author: "John Doe",
+    authorEmail: "john@gmail.com",
+    createdAt: "2018-01-01",
     title: "Post 1",
     content: "A post about nothing ",
-    author: "John Doe",
-    datepublished: "2018-01-01",
-    category: "general",
+    category: "General",
+    thumbnail:
+      "https://images.pexels.com/photos/18895272/pexels-photo-18895272/free-photo-of-after-glow.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
     links: ["https://www.google.com", "https://www.yahoo.com"],
-    thumbnail: "https://picsum.photos/200/300/?random",
   },
   {
-    id: 2,
+    id: "2",
     title: "Post 2",
     content: "A post about something",
+    authorEmail: "john@gmail.com",
     author: "Ed Roh",
-    datepublished: "2018-01-01",
-    category: "general",
+    createdAt: "2018-01-01",
+    category: "General",
     links: ["https://www.google.com", "https://www.yahoo.com"],
-    thumbnail: "https://picsum.photos/200/300/?random",
+    thumbnail:
+      "https://images.pexels.com/photos/19081146/pexels-photo-19081146/free-photo-of-a-blurry-image-of-a-car-driving-down-a-street.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
   },
 ];
 
