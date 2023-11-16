@@ -13,7 +13,6 @@ const getCategories = async (): Promise<TCategory[] | null> => {
         if (response.ok) {
 
             const categories = await response.json();
-            console.log(categories);
             return categories;
 
         }
