@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { signIn } from "next-auth/react";
 
 export default function SignInBtns() {
     return (
@@ -8,7 +9,7 @@ export default function SignInBtns() {
             <h1 className="text-center mt-8">Sign in</h1>
             <div className="mt-4 p-4 flex flex-col items-center justify-center gap-4">
                 <button
-                    onClick={() => { }}
+                    onClick={() => signIn("github")}
                     className="flex items-center border p-4 rounded-full gap-4 hover:bg-slate-100/25 transition"
                 >
                     <span>
@@ -23,7 +24,7 @@ export default function SignInBtns() {
                 </button>
 
                 <button
-                    onClick={() => { }}
+                    onClick={() => signIn("google")}
                     className="flex items-center border p-4 rounded-full gap-4 hover:bg-slate-100/25 transition"
                 >
                     <span>

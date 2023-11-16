@@ -15,6 +15,10 @@ const authOptions: AuthOptions = {
         }),
     ],
     secret: process.env.SECRET as string,
+    pages: {
+        signIn: '/sign-in',
+
+    },
 
 };
 
