@@ -30,11 +30,21 @@ const Post = async ({
 }: PostProps) => {
     const session = await getServerSession(authOptions);
     const isEditable = session && session?.user?.email === authorEmail;
+
+    const dateObject = new Date(date);
+    const options: Intl.DateTimeFormatOptions = {
+        month: "short",
+        day: "numeric",
+        year: "numeric",
+    }
+
+    const formattedDate = dateObject.toLocaleDateString("en-US", options);
+
     return (
         <div className="my-4 border-b border-b-300 py-8">
             <div className="mb-4">
                 Posted By: <span className="font-bold">{author} </span>
-                <span>on {date}</span>
+                <span>on {formattedDate}</span>
             </div>
             <div className="w-full h-72 relative">
                 {thumbnail ? (
