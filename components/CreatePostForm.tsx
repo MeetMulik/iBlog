@@ -17,7 +17,17 @@ export default function CreatePostForm() {
 
     const router = useRouter();
 
+    const addLink = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        e.preventDefault();
+        if (linkInput.trim() !== "") {
+            setLinks((prev) => [...prev, linkInput]);
+            setLinkInput("");
+        }
+    };
 
+    const deleteLink = (index: number) => {
+        setLinks((prev) => prev.filter((_, i) => i !== index))
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -60,7 +70,7 @@ export default function CreatePostForm() {
                             <Link className="link" href={link}>
                                 {link}
                             </Link>
-                            <span className="cursor-pointer" onClick={() => { }}>
+                            <span className="cursor-pointer" onClick={() => deleteLink(i)}>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     fill="none"
@@ -87,7 +97,7 @@ export default function CreatePostForm() {
                         value={linkInput}
                         placeholder="Paste the link and click on Add"
                     />
-                    <button onClick={() => { }} className="btn flex gap-2 items-center">
+                    <button onClick={addLink} className="btn flex gap-2 items-center">
                         <span>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
