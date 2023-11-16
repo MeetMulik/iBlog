@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { useSession, signOut } from "next-auth/react";
 import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 
 export default function Navbar() {
+    const { status, data: session } = useSession();
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const popupRef = useRef<HTMLDivElement | null>(null);
 
@@ -39,15 +41,15 @@ export default function Navbar() {
                 </p>
             </div>
 
-            {"authenticated" === "authenticated" ? (
+            {status === "authenticated" ? (
                 <>
                     <div
                         ref={popupRef}
                         className={`absolute z-30 right-0 top-20 bg-white p-6 shadow-lg rounded-md flex-col gap-2 text-right min-w-[160px] ${isPopupVisible ? "flex" : "hidden"
                             }`}
                     >
-                        <div className="font-bold">John Doe</div>
-                        <div>john@gmail.com</div>
+                        <div className="font-bold">{session?.user?.name}</div>
+                        <div>{session?.user?.email}</div>
                         <Link
                             onClick={() => setIsPopupVisible(false)}
                             className="hover:underline"
@@ -62,7 +64,7 @@ export default function Navbar() {
                         >
                             Create Post
                         </Link>
-                        <button onClick={() => { }} className="btn">
+                        <button onClick={() => signOut()} className="btn">
                             Sign Out
                         </button>
                     </div>
@@ -91,7 +93,7 @@ export default function Navbar() {
                             <span>Create new</span>
                         </Link>
                         <Image
-                            src={""}
+                            src={session?.user?.image || ""}
                             width={36}
                             height={36}
                             alt="Profile Image"
