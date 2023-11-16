@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma";
+import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/route";
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
     const id = params.id;
@@ -20,6 +22,11 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
 export async function PUT(req: Request, { params }: { params: { id: string } }) {
     const { title, content, links, selectedCategory, imageUrl, publicId } = await req.json();
     const id = params.id;
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+    }
+
     try {
         const updatedPost = await prisma.post.update({
             where: {
@@ -42,6 +49,11 @@ export async function PUT(req: Request, { params }: { params: { id: string } }) 
 
 export async function DELETE(req: Request, { params }: { params: { id: string } }) {
     const id = params.id;
+    const session = await getServerSession(authOptions);
+    if (!session) {
+        return NextResponse.json({ message: "Unauthorized" }, { status: 401 })
+    }
+
     try {
         const deletedPost = await prisma.post.delete({
             where: {

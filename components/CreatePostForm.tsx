@@ -4,16 +4,28 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { categoriesData } from "@/data";
+import { TCategory } from "@/types";
 
 export default function CreatePostForm() {
     const [links, setLinks] = useState<string[]>([]);
     const [linkInput, setLinkInput] = useState("");
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
+    const [categories, setCategories] = useState<TCategory[]>([]);
     const [selectedCategory, setSelectedCategory] = useState("");
     const [imageUrl, setImageUrl] = useState("");
     const [publicId, setPublicId] = useState("");
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchAllCategories = async () => {
+            const res = await fetch("/api/categories");
+            const catNames = await res.json();
+            setCategories(catNames);
+        }
+        fetchAllCategories();
+    }, []);
+
 
     const router = useRouter();
 
@@ -31,7 +43,30 @@ export default function CreatePostForm() {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-
+        if (!title || !content || !selectedCategory) {
+            return setError("Please fill all the fields")
+        }
+        try {
+            const res = await fetch('api/posts', {
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                method: 'POST',
+                body: JSON.stringify({
+                    title,
+                    content,
+                    links,
+                    selectedCategory,
+                    imageUrl,
+                    publicId
+                })
+            });
+            if (res.ok) {
+                router.push('/dashboard');
+            }
+        } catch (error) {
+            console.log('create post error', error);
+        }
     };
 
     return (
@@ -128,10 +163,10 @@ export default function CreatePostForm() {
                     className="p-3 rounded-md border appearance-none"
                 >
                     <option value="">Select A Category</option>
-                    {categoriesData &&
-                        categoriesData.map((category) => (
-                            <option key={category.id} value={category.name}>
-                                {category.name}
+                    {categories &&
+                        categories.map((category) => (
+                            <option key={category.id} value={category.catName}>
+                                {category.catName}
                             </option>
                         ))}
                 </select>
@@ -139,6 +174,7 @@ export default function CreatePostForm() {
                 <button className="primary-btn" type="submit">
                     Create Post
                 </button>
+                {error && <div className="p-2 text-red-500 font-bold">{error}</div>}
             </form>
         </div>
     );
