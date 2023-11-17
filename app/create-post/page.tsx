@@ -1,6 +1,6 @@
 import CreatePostForm from "@/components/CreatePostForm";
+import { authOptions } from "@/lib/auth";
 import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
 export default async function CreatePost() {

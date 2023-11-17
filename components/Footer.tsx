@@ -1,9 +1,7 @@
-import React from 'react'
-
-const Footer = () => {
+export default function Footer() {
     return (
-        <div>Footer</div>
-    )
+        <footer className="py-3">
+            Share your blogs easily and effortlessly © 2023
+        </footer>
+    );
 }
-
-export default Footer

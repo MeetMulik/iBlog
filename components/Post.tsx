@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import DeleteButton from "./DeleteButton";
 import { Session, getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { authOptions } from "@/lib/auth";
 
 interface PostProps {
     id: string;
