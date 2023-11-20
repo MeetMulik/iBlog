@@ -126,3 +126,18 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## Screenshots 📷
+
+### Feed
+![image](https://github.com/MeetMulik/iBlog/assets/89148021/9971b999-414e-4801-8a89-d6468070f81e)
+
+
+### Create Post
+![image](https://github.com/MeetMulik/iBlog/assets/89148021/c3c589f2-643a-4c50-b408-887062878ad3)
+
+### Dashboard
+![image](https://github.com/MeetMulik/iBlog/assets/89148021/6bd42220-cec4-4f13-8646-3e8061f7727c)
+
+### Update Post
+![image](https://github.com/MeetMulik/iBlog/assets/89148021/06586bc7-e237-4135-8317-73751bfda059)
+
